@@ -11,14 +11,16 @@ var gulp = require( "gulp" ),
     autoprefixer = require( "gulp-autoprefixer" ),
     csso = require( "gulp-csso" ),
     pug = require( "gulp-pug" ),
-    babel = require( "gulp-babel" );
+    babel = require( "gulp-babel" ),
+    livereload = require( "gulp-livereload" );
 
 // --- Task for images
 
 gulp.task( "images", function() {
     gulp.src( "src/images/**" )
         .pipe( image() )
-        .pipe( gulp.dest( "assets/images" ) );
+        .pipe( gulp.dest( "assets/images" ) )
+        .pipe( livereload( { start: true } ) );
 } );
 
 // --- Task for styles
@@ -28,7 +30,8 @@ gulp.task( "css", function() {
         .pipe( sass().on( "error", sass.logError ) )
         .pipe( autoprefixer() )
         .pipe( csso() )
-        .pipe( gulp.dest( "assets/css" ) );
+        .pipe( gulp.dest( "assets/css" ) )
+        .pipe( livereload( { start: true } ) );
 } );
 
 // --- Task for pug
@@ -36,7 +39,8 @@ gulp.task( "css", function() {
 gulp.task( "html", function() {
     gulp.src( "src/pug/**/*.pug" )
         .pipe( pug( {} ) )
-        .pipe( gulp.dest( "." ) );
+        .pipe( gulp.dest( "." ) )
+        .pipe( livereload( { start: true } ) );
 } );
 
 // --- Task for js
@@ -44,12 +48,14 @@ gulp.task( "html", function() {
 gulp.task( "js", function() {
     gulp.src( "src/js/**/*.js" )
         .pipe( babel() )
-        .pipe( gulp.dest( "assets/js" ) );
+        .pipe( gulp.dest( "assets/js" ) )
+        .pipe( livereload( { start: true } ) );
 } );
 
 // --- Watch tasks
 
 gulp.task( "watch", function() {
+    livereload.listen();
     gulp.watch( "src/images/**", [ "images" ] );
     gulp.watch( "src/sass/**/*.scss", [ "css" ] );
     gulp.watch( "src/pug/**/*.pug", [ "html" ] );
