@@ -5,4 +5,14 @@
 /  started at 09/02/2017
 */
 
-console.log( "Hello, world!" );
+let oFlipFront = document.querySelector( ".flip-front" ),
+    oFlipBack = document.querySelector( ".flip-back" ),
+    oCard = document.querySelector( ".container" );
+
+oFlipFront.addEventListener( "click", () => {
+    oCard.classList.add( "flip" );
+} );
+
+oFlipBack.addEventListener( "click", () => {
+    oCard.classList.remove( "flip" );
+} );
