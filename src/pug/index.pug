@@ -4,24 +4,36 @@ html( lang="fr" )
         meta( charset="utf-8" )/
 
         title Ma super carte de visite
+        meta( name="viewport", content="width=device-width", initial-scale="1.0", minimum-scale="1.0" )
         link( rel="stylesheet", href="assets/css/styles.css" )/
 
     body
-        h1 Ma super carte de visite
-        div( class="container" )
-            img( class="flip-icon flip-front" src="assets/images/flip-icon.svg" alt="Flip icon" title="Flip" width="50px" height="50px" )
-            div( class="front" )
-                ul
-                    li Quentin
-                    li George
+        main
+            section.face
+                h1
+                    strong= lastname
+                    = " "
+                    span= firstname
 
-            img( class="flip-icon flip-back" src="assets/images/flip-icon.svg" alt="Flip icon" title="Flip" width="50px" height="50px" )
-            div( class="back" )
-                ul
-                    li Quentin
-                    li George
-                    li quentingeorge7@gmail.com
-                    li 04 358 44 77
-                    li https://github.com/QuentinGeorge
+                p= position
+
+            section.back
+                h2= firstname + " " + lastname
+                dl
+                    dt email
+                    dd= email
+                    dt téléphone
+                    dd= phone
+                    dt site web
+                    dd= url
+
+        nav
+            a( href="javascript:void(0)" )
+                include ../../assets/images/flip-icon.svg
+                = " "
+                span retourner la carte
+
+        footer
+            small ©2017 #[a( href="https://github.com/QuentinGeorge" ) Quentin]
 
         script( src="assets/js/script.js" )

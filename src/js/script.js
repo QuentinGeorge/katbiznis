@@ -5,14 +5,9 @@
 /  started at 09/02/2017
 */
 
-let oFlipFront = document.querySelector( ".flip-front" ),
-    oFlipBack = document.querySelector( ".flip-back" ),
-    oCard = document.querySelector( ".container" );
+const $main = document.querySelector( "main" );
 
-oFlipFront.addEventListener( "click", () => {
-    oCard.classList.add( "flip" );
-} );
-
-oFlipBack.addEventListener( "click", () => {
-    oCard.classList.remove( "flip" );
+document.querySelector( "nav a" ).addEventListener( "click", function( oEvent )  {
+    oEvent.preventDefault();
+    $main.classList.toggle( "flipped" );
 } );

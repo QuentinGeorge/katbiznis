@@ -5,130 +5,165 @@
 /  started at 09/02/2017
 */
 
-// Generic: Reset styles, normalize, ...
-@import "generic/meyer-reset";
-
-h1 {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 3em;
+//**Reset**//
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+//****//
+html {
+    height: 100%;
+    background: white url( ../images/main-bcg.png ) center repeat;
+    background-size: 104px auto;
+    font: normal 62.5%/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: black;
 }
 
 body {
-    margin: 0 5%;
-}
-
-.container {
-    display: block;
-    margin: 0 auto;
-}
-
-.front {
-    background: url( "../images/card-bcg.jpg" ) center;
-    background-size: cover;
-    color: #fff;
-    font-size: 2.5em;
-    position: relative;
-}
-
-.front ul {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-.front li {
-    display: inline-block;
-    margin: 0.25em;
-}
-
-.back {
-    background: url( "../images/main-bcg.png" ) center;
     display: flex;
-}
-
-.back ul {
-    display: flex;
+    min-height: 100%;
     flex-direction: column;
-}
-
-.back li {
-    display: flex;
-    flex: auto;
+    justify-content: center;
     align-items: center;
 }
 
-.front, .back {
-    max-width: 720px;
-    height: 280px;
-    margin: 50px auto;
-    box-shadow: 5px 5px 5px #aaa;
+main {
+    width: 90%;
+    max-width: 30rem;
 }
 
-ul {
-    padding: 20px;
+section {
+    min-height: 20rem;
+    background: white;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    box-shadow: 0 0 .5rem rgba( black, .25 );
+    &.face {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: black url( ../images/card-bcg.jpg ) center no-repeat;
+        background-size: 125% auto;
+    }
+    &.back {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+    }
 }
 
-.flip-icon {
+h1 {
+    font-weight: 100;
+    font-size: 2.4rem;
+    color: white;
+    text-shadow: 0 0 .5rem black;
+}
+
+p {
+    font-size: 1.4rem;
+    color: white;
+    text-shadow: 0 0 .5rem black;
+}
+
+h2 {
+    font-weight: 200;
+    margin-bottom: 1rem;
+}
+
+dl {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    dt {
+        width: 25.5%;
+        margin-bottom: 1rem;
+        margin-right: 2.5%;
+        font-size: 1rem;
+        color: #888;
+        text-align: right;
+    }
+    dd {
+        width: 70%;
+        margin: 0 0 1rem;
+        font-size: 1.2rem;
+        color: #333;
+    }
+}
+
+
+nav {
     display: none;
 }
 
-@media( min-width: 720px ) {
-    html {
-        font-size: 2em;
-    }
+footer {
+    font-size: 1.2rem;
+}
 
+@media screen and ( min-width: 640px ) {
     body {
-        perspective: 1000;
-    }
+       perspective: 50rem;
+   }
 
-    .container {
-        position: relative;
-        max-width: 1024px;
-        width: 100%;
-        height: 576px;
-        transform-style: preserve-3d;
-        transition: all 1.0s linear;
-    }
+   main {
+       position: relative;
+       min-height: 20rem;
+       transition: transform .25s ease-in-out;
+       &.flipped {
+           transform-style: preserve-3d;
+           transform: rotateY( 180deg );
+       }
+   }
 
-    .front, .back {
-        max-width: 1024px;
-        width: 100%;
-        height: 576px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        backface-visibility: hidden;
-    }
+   section {
+       position: absolute;
+       width: 100%;
+       backface-visibility: hidden;
+       &.back {
+           transform: rotateY( 180deg );
+       }
+   }
 
-    .front {
-        z-index: 1;
-    }
-
-    .back {
-        transform: rotateY(180deg);
-    }
-
-    .flip-icon {
-        display: block;
-        position: absolute;
-        top: 70px;
-        z-index: 2;
-        background-color: #ddd;
-        padding: 10px;
-        border-radius: 20px;
-    }
-
-    .flip-front {
-        right: 20px;
-    }
-
-    .flip-back {
-        left: 20px;
-        transform: rotateY(180deg);
-    }
-
-    .flip {
-        transform: rotateY(180deg);
+   nav {
+       display: block;
+       width: 90%;
+       max-width: 30rem;
+       margin: 1rem auto;
+       font-size: 1.4rem;
+       text-align: left;
+       a {
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: purple;
+            text-decoration: none;
+            transition: color .125s ease-in-out;
+            svg {
+                height: 1.8rem;
+                margin-right: .5rem;
+                fill: purple;
+                transition: fill .125s ease-in-out, transform .25s ease-in-out;
+                path:nth-child(2) {
+                    transform-origin: 50% 50% 0;
+                    transition: opacity .25s ease, transform .125s ease;
+                }
+            }
+            &:hover {
+                color: blue;
+                svg {
+                    fill: blue;
+                    transform: rotate( 180deg );
+                    path:nth-child(2) {
+                        opacity: 0;
+                        transform: scale(1.25);
+                    }
+                }
+            }
+        }
     }
 }
